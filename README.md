@@ -10,7 +10,7 @@ pip install cloud_logger
 
 ## Setup
 
-Set your aws access key and secret key to CLOUD_LOGGER_ACCESS_KEY_ID,CLOUD_LOGGER_SECRET_ACCESS_KEY as follows.
+Set your aws access key and secret key to environment variables as follows.
 
 ```
 export CLOUD_LOGGER_ACCESS_KEY_ID="XXX"
