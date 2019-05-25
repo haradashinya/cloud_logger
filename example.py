@@ -1,4 +1,4 @@
-from __init__ import CloudLogger,CloudLoggerObject,CloudHandler
+from cloud_logger.__init__ import CloudLogger,CloudLoggerObject,CloudHandler
 import logging
 
 if __name__ == '__main__':

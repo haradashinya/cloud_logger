@@ -62,6 +62,16 @@ class CloudHandler(logging.StreamHandler):
         self.logger_obj = logger_obj
         self.setFormatter(logging.Formatter(logger_obj.format))
         client = self.logger_obj.client
+
+        # Create a log group
+        try:
+            client.create_log_group(
+            logGroupName=self.logger_obj.name
+            )
+        except Exception as e:
+            if e.__dict__['response']['Error']['Code'] == 'ResourceAlreadyExistsException': pass
+
+        # Create log streams
         groups = ['DEBUG','WARNING','ERROR','CRITICAL','FATAL']
         for group in groups:
             try:
