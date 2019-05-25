@@ -62,9 +62,8 @@ class CloudHandler(logging.StreamHandler):
         try:
             client.create_log_group(logGroupName=self.logger_obj.name)
         except Exception as e:
-            if e.__dict__['response']['Error'][
-                    'Code'] != 'ResourceAlreadyExistsException':
-                raise Exception(f:'Error happend when create a group: {e}')
+            if e.__dict__['response']['Error']['Code'] != 'ResourceAlreadyExistsException':
+                raise Exception(f'Error happend when create a group: {e}')
 
         # Create log streams
         groups = ['DEBUG', 'WARNING', 'ERROR', 'CRITICAL', 'FATAL']
@@ -73,9 +72,9 @@ class CloudHandler(logging.StreamHandler):
                 client.create_log_stream(logGroupName=self.logger_obj.name,
                                          logStreamName=group)
             except Exception as e:
-                if e.__dict__['response']['Error'][
-                        'Code'] != 'ResourceAlreadyExistsException':
-                    raise Exception(f:'Error happened when create a log stream: {e}')
+                if e.__dict__['response']['Error']['Code'] != 'ResourceAlreadyExistsException':
+                    raise Exception(f'Error happened when create a log stream: {e}')
+
     def build_put_params(self, log_streams, log_stream_name, message):
         params = dict(
             logGroupName=self.logger_obj.name,
