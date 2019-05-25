@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
         name="cloud-logger",
-        version="0.1.2",
+        version="0.1.3",
         author="furodrive",
         author_email="furodrive@gmail.com",
         packages=setuptools.find_packages(),
