@@ -1,6 +1,6 @@
 # cloud_logger
 
-A logging library which put events to AWS Cloud Watch logs.
+A logging library which put events to AWS Cloud Watch Logs.
 
 ## Install
 
@@ -10,14 +10,14 @@ pip install cloud_logger
 
 ## Setup
 
-Set AWS_ACCESS_KEY_ID, SECRET_ACCESS_KEY to CLOUD_LOGGER_ACCESS_KEY_ID,CLOUD_LOGGER_SECRET_ACCESS_KEY.
+Set your aws access key and secret key to CLOUD_LOGGER_ACCESS_KEY_ID,CLOUD_LOGGER_SECRET_ACCESS_KEY like this.
 
 ```
 export CLOUD_LOGGER_ACCESS_KEY_ID="XXX"
 export CLOUD_LOGGER_SECRET_ACCESS_KEY="XXX"
 ```
 
-## How to use
+## Example
 
 ```python
 
