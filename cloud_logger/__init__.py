@@ -39,8 +39,7 @@ class CloudLogger:
             s_token = log_streams['logStreams'][0]['uploadSequenceToken']
             params['sequenceToken'] = s_token
         except:
-            raise Exception('Invalid sequenceToken')
-        return params
+            return params
 
     def get_log_streams(self, log_stream_name):
         return self.logger_obj.client.describe_log_streams(
