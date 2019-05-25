@@ -8,14 +8,6 @@ import boto3
 from io import StringIO
 
 
-class SequenceTokenDoesNotExist(Exception):
-    pass
-
-
-class PutLogEventError(Exception):
-    pass
-
-
 class CloudLoggerObject:
     def __init__(self, format, name, **kwargs):
         self.name = name
