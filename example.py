@@ -4,7 +4,7 @@ import logging
 if __name__ == '__main__':
     # Setup cloud_logger
     logger_obj = CloudLoggerObject(
-        name='horenso',
+        name='xxx',
         format='%(asctime)s : %(levelname)s : %(filename)s  a %(funcName)s %(message)s',
     )
     logger = logging.getLogger(__name__)
