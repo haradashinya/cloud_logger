@@ -8,8 +8,12 @@ import boto3
 from io import StringIO
 
 
-class SequenceTokenDoesNotExist(Exception): pass
-class PutLogEventError(Exception): pass
+class SequenceTokenDoesNotExist(Exception):
+    pass
+
+
+class PutLogEventError(Exception):
+    pass
 
 
 class CloudLoggerObject:
@@ -65,21 +69,22 @@ class CloudHandler(logging.StreamHandler):
 
         # Create a log group
         try:
-            client.create_log_group(
-            logGroupName=self.logger_obj.name
-            )
+            client.create_log_group(logGroupName=self.logger_obj.name)
         except Exception as e:
-            if e.__dict__['response']['Error']['Code'] == 'ResourceAlreadyExistsException': pass
+            if e.__dict__['response']['Error'][
+                    'Code'] != 'ResourceAlreadyExistsException':
+                raise Exception(f:'Error happend when create a group: {e}')
 
         # Create log streams
-        groups = ['DEBUG','WARNING','ERROR','CRITICAL','FATAL']
+        groups = ['DEBUG', 'WARNING', 'ERROR', 'CRITICAL', 'FATAL']
         for group in groups:
             try:
-                client.create_log_stream(
-                    logGroupName=self.logger_obj.name, logStreamName=group)
+                client.create_log_stream(logGroupName=self.logger_obj.name,
+                                         logStreamName=group)
             except Exception as e:
-                continue
-
+                if e.__dict__['response']['Error'][
+                        'Code'] != 'ResourceAlreadyExistsException':
+                    raise Exception(f:'Error happened when create a log stream: {e}')
     def build_put_params(self, log_streams, log_stream_name, message):
         params = dict(
             logGroupName=self.logger_obj.name,
@@ -103,9 +108,9 @@ class CloudHandler(logging.StreamHandler):
             logStreamNamePrefix=log_stream_name,
             limit=1)
 
-    def put_log_event(self,log_stream_name,msg):
+    def put_log_event(self, log_stream_name, msg):
         self.logger_obj.client.put_log_events(**self.build_put_params(
-        self.get_log_streams(log_stream_name), log_stream_name, msg))
+            self.get_log_streams(log_stream_name), log_stream_name, msg))
 
     def emit(self, record):
         try:
@@ -117,13 +122,8 @@ class CloudHandler(logging.StreamHandler):
             log_streams = self.get_log_streams(log_stream_name)
             self.flush()
             try:
-                self.put_log_event(log_stream_name,msg)
+                self.put_log_event(log_stream_name, msg)
             except Exception as e2:
                 print(f'PutLogEventError: {e2}')
         except Exception as e:
             self.handleError(record)
-        
-
-
-
-
