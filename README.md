@@ -21,7 +21,7 @@ export CLOUD_LOGGER_SECRET_ACCESS_KEY="XXX"
 
 ```python
 
-from __init__ import CloudLogger,CloudLoggerObject,CloudHandler
+from cloud_logger import CloudLogger,CloudLoggerObject,CloudHandler
 import logging
 
 if __name__ == '__main__':

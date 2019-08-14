@@ -17,9 +17,12 @@ class CloudLoggerObject:
             'CLOUD_LOGGER_ACCESS_KEY_ID').strip()
         aws_secret_access_key = os.environ.get(
             'CLOUD_LOGGER_SECRET_ACCESS_KEY').strip()
+
+        aws_region_name = os.environ.get('CLOUD_LOGGER_REGION').strip()
         self.client = boto3.client('logs',
                                    aws_access_key_id=aws_access_key_id,
-                                   aws_secret_access_key=aws_secret_access_key)
+                                   aws_secret_access_key=aws_secret_access_key,
+                                   region_name=aws_region_name)
 
 
 class CloudLogger:
